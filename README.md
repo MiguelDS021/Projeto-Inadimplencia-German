@@ -1,9 +1,9 @@
-German Credit Data — Classificação de Risco de Crédito
+German Credit Data - Classificação de Risco de Crédito
 
 Projeto de classificação binária para prever o risco de crédito (bom ou mau pagador) utilizando o dataset Statlog (German Credit Data), da UCI Machine Learning Repository.
 
 📌 Sobre o Dataset
-Fonte: Hans Hofmann, Universität Hamburg (1994) — UCI ML Repository
+Fonte: Hans Hofmann, Universität Hamburg (1994) - UCI ML Repository
 Instâncias: 1.000
 Atributos: 20 (7 numéricos + 13 categóricos)
 Variável alvo (class): 1 = Good (bom pagador) · 2 = Bad (mau pagador)
@@ -17,30 +17,30 @@ Real Good	0	1
 Real Bad	5	0
 
 🗂️ Estrutura do pipeline
-Encoding — tradução dos códigos originais (A11, A30, A61...) via dicionário aninhado
-Mapeamento ordinal — conversão de checking_account, credit_history, savings, employment para escala numérica (0,1,2,3...), preservando ordem
-Análise de outliers — regra do IQR nas variáveis duration, credit_amount, age
-Correlação — Pearson (numéricas) e Cramér's V (categóricas) com o target
-Seleção de features — remoção por baixa correlação, multicolinearidade e viés ético
-One-Hot Encoding — variáveis nominais (purpose, property, other_debtors, other_installment_plans)
-Split treino/teste — estratificado (stratify=y), 80/20
-Padronização — StandardScaler, fit apenas no treino
-Modelagem — Regressão Logística
-Otimização — ajuste de threshold e class_weight
+Encoding: tradução dos códigos originais (A11, A30, A61...) via dicionário aninhado
+Mapeamento ordinal: conversão de checking_account, credit_history, savings, employment para escala numérica (0,1,2,3...), preservando ordem
+Análise de outliers: regra do IQR nas variáveis duration, credit_amount, age
+Correlação: Pearson (numéricas) e Cramér's V (categóricas) com o target
+Seleção de features: remoção por baixa correlação, multicolinearidade e viés ético
+One-Hot Encoding: variáveis nominais (purpose, property, other_debtors, other_installment_plans)
+Split treino/teste: estratificado (stratify=y), 80/20
+Padronização: StandardScaler, fit apenas no treino
+Modelagem: Regressão Logística
+Otimização: ajuste de threshold e class_weight
 
 ⚖️ Decisões éticas
 personal_status_sex removida da classificação: o atributo mistura estado civil e sexo de forma desigual entre gêneros (categoria A92 agrupa "divorciada/separada/casada" apenas para mulheres, enquanto homens têm categorias distintas), o que introduziria viés discriminatório de gênero.
 foreign_worker removida: associação estatística quase nula com o target (Cramér's V = 0,076) e variável sensível do ponto de vista de discriminação por nacionalidade.
 
-🔎 Principais achados — Outliers
+🔎 Principais achados - Outliers
 Variável	Nº outliers	% Bad no grupo	% Bad no dataset geral
 credit_amount	72	54,2%	~30%
 duration	70	57,1%	~30%
 age	17	35,3%	~30%
 
-Outliers de credit_amount e duration foram mantidos: concentram-se em finalidades legítimas (veículos, negócios) e carregam sinal preditivo relevante — a proporção de maus pagadores quase dobra nesses grupos.
+Outliers de credit_amount e duration foram mantidos: concentram-se em finalidades legítimas (veículos, negócios) e carregam sinal preditivo relevante, a proporção de maus pagadores quase dobra nesses grupos.
 
-🔗 Principais achados — Correlação
+🔗 Principais achados - Correlação
 
 Numéricas (Pearson) com class:
 
@@ -87,6 +87,5 @@ scikit-learn
 matplotlib, seaborn
 scipy (teste qui-quadrado)
 
-└── README.md
 📚 Referências
 Hofmann, H. (1994). Statlog (German Credit Data). UCI Machine Learning Repository. https://doi.org/10.24432/C5NC77
